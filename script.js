@@ -58,8 +58,8 @@ function iniciarRotacaoSlides() {
   const slides = document.querySelectorAll(".slide-page");
   if (slides.length === 0) return;
   let indexAtual = 0;
-  const TEMPO_DADOS = 2000;
-  const TEMPO_MAPA = 20000;
+  const TEMPO_DADOS = 20000;
+  const TEMPO_MAPA = 2000;
 
   function agendarProximaTroca(tempoDeEspera) {
     setTimeout(() => {
@@ -271,6 +271,9 @@ async function carregarPositivacao() {
 }
 
 async function carregarPodioCompleto() {
+  document
+    .querySelectorAll("#podio-mes-chart .termometro-fill")
+    .forEach((b) => (b.style.width = "0%"));
   try {
     const [resP, resC] = await Promise.all([
       fetch(SHEET_URLS.podioMes),
@@ -285,7 +288,9 @@ async function carregarPodioCompleto() {
         return { nome: c[0].trim(), pts: parseInt(c[1]) };
       })
       .sort((a, b) => b.pts - a.pts);
+
     const max = Math.max(...pontos.map((d) => d.pts)) || 1;
+
     document.getElementById("podio-mes-chart").innerHTML = pontos
       .map(
         (v) => `
@@ -299,6 +304,7 @@ async function carregarPodioCompleto() {
       </div>`,
       )
       .join("");
+
     const campeoes = (await resC.text())
       .trim()
       .split("\n")
@@ -307,18 +313,55 @@ async function carregarPodioCompleto() {
         const c = l.split(",");
         return { sem: c[0].trim(), nome: c[1].trim(), pontos: parseInt(c[2]) };
       });
-    document.getElementById("campeoes-list").innerHTML = campeoes
-      .slice(0, 5)
-      .map(
-        (c) => `
-      <div class="card-campeao-grid">
-        <img src="public/${c.nome}.png" class="foto-grid" onerror="this.src='https://via.placeholder.com/90'">
-        <span class="label-sem-grid">${c.sem}</span>
-        <span class="nome-sem-grid">${c.nome}</span>
-        <span class="nome-sem-grid">Pontos ${c.pontos}</span>
-      </div>`,
-      )
-      .join("");
+
+    /* --- LÓGICA DE EXIBIÇÃO: 1ª SEMANA VS RESTO DO MÊS --- */
+    const diaAtual = new Date().getDate();
+    const isPrimeiraSemana = diaAtual <= 7;
+
+    // Captura o título e o container da direita para podermos manipulá-los
+    const tituloDireita = document.querySelector(
+      ".podio-lado-direito .titulo-sessao",
+    );
+    const containerCampeoes = document.getElementById("campeoes-list");
+
+    // Verifica se é a primeira semana E se existem dados no ranking principal
+    if (isPrimeiraSemana && pontos.length > 0) {
+      // Altera o título dinamicamente
+      if (tituloDireita) tituloDireita.innerText = "CAMPEÃO DO MÊS ANTERIOR";
+
+      // Troca a classe para remover a grelha 2x2 e permitir o alinhamento central
+      containerCampeoes.className = "campeao-mes-unico";
+
+      // Pega no líder atual (o que tem mais pontos no array ordenado)
+      const campeaoMes = pontos[0];
+
+      containerCampeoes.innerHTML = `
+        <div class="card-campeao-mes">
+          <img src="public/${campeaoMes.nome}.png" class="foto-grid" onerror="this.src='https://via.placeholder.com/150'">
+          <span class="label-campeao">🏆 DESTAQUE 🏆</span>
+          <span class="nome-sem-grid">${campeaoMes.nome}</span>
+          <span class="pts-campeao">${campeaoMes.pts} pts</span>
+        </div>
+      `;
+    } else {
+      // Se já passou do dia 7, restaura o formato padrão semanal
+      if (tituloDireita) tituloDireita.innerText = "CAMPEÕES DAS SEMANAS";
+      containerCampeoes.className = "campeoes-grid-2x2";
+
+      containerCampeoes.innerHTML = campeoes
+        .slice(0, 5)
+        .map(
+          (c) => `
+        <div class="card-campeao-grid">
+          <img src="public/${c.nome}.png" class="foto-grid" onerror="this.src='https://via.placeholder.com/90'">
+          <span class="label-sem-grid">${c.sem}</span>
+          <span class="nome-sem-grid">${c.nome}</span>
+          <span class="nome-sem-grid">Pontos ${c.pontos}</span>
+        </div>`,
+        )
+        .join("");
+    }
+
     setTimeout(
       () =>
         document

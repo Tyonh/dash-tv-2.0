@@ -473,3 +473,70 @@ body {
   font-weight: 800;
   font-size: 1.1rem; /* Fonte de destaque reduzida */
 }
+
+/* --- DESTAQUE: CAMPEÃO DO MÊS ANTERIOR (1ª SEMANA) --- */
+.campeao-mes-unico {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding-top: 20px;
+}
+
+.card-campeao-mes {
+  background: #fff;
+  border-radius: 15px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  border-bottom: 6px solid #ffaa00; /* Borda Dourada/Laranja */
+  width: 280px;
+  text-align: center;
+  animation: pulse-gold 2.5s infinite; /* Efeito de brilho chamativo na TV */
+}
+
+@keyframes pulse-gold {
+  0% {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    box-shadow: 0 10px 45px rgba(255, 170, 0, 0.6);
+  }
+  100% {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.card-campeao-mes .foto-grid {
+  width: 150px;
+  height: 150px;
+  border: 4px solid #ffaa00;
+  margin-bottom: 15px;
+}
+
+.label-campeao {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #ffaa00;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.card-campeao-mes .nome-sem-grid {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--cinza-escuro);
+  line-height: 1.2;
+}
+
+.card-campeao-mes .pts-campeao {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--vermelho);
+  margin-top: 8px;
+}
