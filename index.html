@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Corporativo TV</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="main-slider">
+      <div class="slide-page active" id="slide-dados">
+        <div class="dashboard-vertical">
+          <section class="dash-section" id="section-ranking">
+            <div class="header-section">
+              <div class="header-left">
+                <h1>RANKING</h1>
+                <h2>META INDIVIDUAL</h2>
+              </div>
+              <div class="header-right">
+                <div class="data-badge">
+                  <span id="relogio-data">00/00/0000</span> |
+                  <span id="relogio-hora">00:00:00</span>
+                </div>
+              </div>
+            </div>
+            <div class="content-wrapper">
+              <div class="ranking-container" id="ranking-list">
+                <div class="loading">Carregando Ranking...</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="dash-section" id="section-positivacao">
+            <div class="header-section">
+              <div class="header-left">
+                <h1>POSITIVAÇÃO</h1>
+                <h2>META x REALIZADO</h2>
+              </div>
+              <div class="header-right">
+                <div class="data-badge"><span class="mes-atual">...</span></div>
+              </div>
+            </div>
+            <div class="chart-wrapper">
+              <div class="chart-container" id="positivacao-chart">
+                <div class="loading">Carregando Gráfico...</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="dash-section" id="section-podio">
+            <div class="header-section">
+              <div class="header-left">
+                <h1>PÓDIO DO MÊS</h1>
+                <h2>RESULTADOS CONSOLIDADOS</h2>
+              </div>
+              <div class="header-right">
+                <div class="data-badge"><span class="mes-atual">...</span></div>
+              </div>
+            </div>
+            <div class="podio-split-layout">
+              <div class="podio-lado-esquerdo">
+                <h3 class="titulo-sessao">PONTUAÇÃO ACUMULADA</h3>
+                <div class="ranking-container" id="podio-mes-chart"></div>
+              </div>
+              <div class="podio-lado-direito">
+                <h3 class="titulo-sessao">CAMPEÕES DAS SEMANAS</h3>
+                <div class="campeoes-grid-2x2" id="campeoes-list"></div>
+              </div>
+            </div>
+          </section>
+
+          <a
+            class="weatherwidget-io"
+            href="https://forecast7.com/pt/n3d73n38d53/fortaleza/"
+            data-label_1="FORTALEZA"
+            data-label_2="CLIMA"
+            data-font="Ubuntu"
+            data-icons="Climacons Animated"
+            data-theme="original"
+            >FORTALEZA CLIMA</a
+          >
+          <script>
+            !(function (d, s, id) {
+              var js,
+                fjs = d.getElementsByTagName(s)[0];
+              if (!d.getElementById(id)) {
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "https://weatherwidget.io/js/widget.min.js";
+                fjs.parentNode.insertBefore(js, fjs);
+              }
+            })(document, "script", "weatherwidget-io-js");
+          </script>
+
+          <div class="news-ticker">
+            <div class="ticker-title">ÚLTIMAS NOTÍCIAS</div>
+            <div class="ticker-wrapper">
+              <div class="ticker-content" id="news-content">
+                Carregando notícias em tempo real...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-page" id="slide-mapa">
+        <div id="map"></div>
+        <div class="logistics-ticker">
+          <div class="logistics-panel">
+            <div class="logistics-title">🏗️ ATUALIZAÇÃO PORTUÁRIA</div>
+            <div class="logistics-list" id="navios-content"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <img
+        id="gato-dançarino"
+        src="/public/cat.gif"
+        style="display: none; position: fixed; z-index: 9999; width: 150px" />
+
+      <script>
+        function iniciarGatoAleatorio() {
+          const gato = document.getElementById("gato-dançarino");
+
+          function aparecer() {
+            // Define posição aleatória (mantendo margem de 150px para não fugir da tela)
+            const top = Math.random() * (window.innerHeight - 150);
+            const left = Math.random() * (window.innerWidth - 150);
+
+            gato.style.top = top + "px";
+            gato.style.left = left + "px";
+            gato.style.display = "block";
+
+            // Fica dançando por 4 segundos e depois some
+            setTimeout(() => {
+              gato.style.display = "none";
+
+              // Espera um tempo aleatório entre 10 e 30 segundos para aparecer de novo
+              // Assim não fica repetitivo demais para quem está trabalhando
+              const proximaEspera = Math.random() * (3000 - 1000) + 1000;
+              setTimeout(aparecer, proximaEspera);
+            }, 4000);
+          }
+
+          // Primeira aparição após 5 segundos que o dashboard carregar
+          setTimeout(aparecer, 5000);
+        }
+
+        // Inicia quando a página carregar
+        window.addEventListener("load", iniciarGatoAleatorio);
+      </script> -->
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
