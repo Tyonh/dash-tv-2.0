@@ -291,12 +291,20 @@ body {
   width: 160px;
   height: 130px;
 }
-.card-campeao-grid:nth-child(5) {
+.card-campeao-grid:nth-child(5),
+.card-campeao-grid-vazio:nth-child(5) {
   grid-column: 1 / -1;
   justify-self: center;
   width: 160px;
   height: 130px;
   margin-top: -5px;
+}
+.card-campeao-grid-vazio {
+  width: 160px;
+  height: 130px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 .foto-grid {
   width: 80px;
@@ -540,3 +548,266 @@ body {
   color: var(--vermelho);
   margin-top: 8px;
 }
+
+/* ====================================================================
+   ESTILOS DE LOGÍSTICA & CLIMA DO MAPA ATIVO
+   ==================================================================== */
+
+/* Linhas logísticas com fluxo tracejado animado */
+.logistic-line {
+  stroke-dasharray: 10, 10;
+  animation: logistic-flow 25s linear infinite;
+  stroke-linecap: round;
+}
+
+@keyframes logistic-flow {
+  from {
+    stroke-dashoffset: 500;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Marcadores de pulso customizados para Leaflet */
+.custom-pulse-marker {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pulse-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 10;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+.pulse-dot.blue {
+  background: #3498db;
+  border: 1.5px solid #fff;
+}
+
+.pulse-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  animation: pulse-grow 2s infinite ease-out;
+  opacity: 0;
+  z-index: 5;
+}
+
+.pulse-ring.blue {
+  border: 3px solid #3498db;
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.4);
+}
+
+@keyframes pulse-grow {
+  0% {
+    transform: scale(0.3);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* Legenda Operacional Flutuante do Mapa */
+.map-legend {
+  position: absolute;
+  bottom: 240px; /* Acima do novo painel de métricas do rodapé */
+  left: 30px;
+  background: rgba(30, 30, 30, 0.85);
+  border: 2px solid rgba(255, 170, 0, 0.7);
+  border-radius: 10px;
+  padding: 15px 20px;
+  color: #fff;
+  z-index: 2000;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+}
+
+.map-legend h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  color: #ffaa00;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(255, 170, 0, 0.3);
+  padding-bottom: 5px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.legend-item:last-child {
+  margin-bottom: 0;
+}
+
+.legend-icon {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-icon.blue-pulse {
+  background: #3498db;
+  border: 1px solid #fff;
+  box-shadow: 0 0 5px #3498db;
+}
+
+.legend-icon.red-dot {
+  background: #ff4444;
+  border: 1px solid #fff;
+}
+
+.legend-icon.route-line {
+  width: 25px;
+  height: 2px;
+  border-radius: 1px;
+  background: #ff3333;
+}
+
+.legend-icon.radar-cloud {
+  width: 18px;
+  height: 12px;
+  border-radius: 4px;
+  background: rgba(240, 240, 240, 0.75);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.legend-icon.rain-light {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #00e676;
+  border: 1px solid #fff;
+  box-shadow: 0 0 5px #00e676;
+}
+
+.legend-icon.rain-medium {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ffeb3b;
+  border: 1px solid #fff;
+  box-shadow: 0 0 5px #ffeb3b;
+}
+
+.legend-icon.rain-heavy {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ff1744;
+  border: 1px solid #fff;
+  box-shadow: 0 0 5px #ff1744;
+}
+
+/* Painel de Métricas do Rodapé do Mapa */
+.map-metrics-panel {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  right: 30px;
+  background: rgba(30, 30, 30, 0.9);
+  border: 3px solid #ffaa00;
+  border-radius: 12px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+}
+
+.metrics-title {
+  background: #ffaa00;
+  color: #000;
+  padding: 8px 0;
+  font-weight: 800;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.metrics-grid {
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.metric-card {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-right: 1px solid rgba(255, 170, 0, 0.3);
+}
+
+.metric-card:last-child {
+  border-right: none;
+}
+
+.metric-label {
+  color: #ccc;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.metric-value {
+  color: #ffaa00;
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+/* ====================================================================
+   NUVENS OPERACIONAIS DINÂMICAS (SIMULADOR DE ATMOSFERA PREMIUM)
+   ==================================================================== */
+.animated-clouds {
+  animation: cloud-atmosphere-drift 45s ease-in-out infinite alternate;
+  pointer-events: none !important;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 15px 15px rgba(0, 0, 0, 0.15));
+}
+
+@keyframes cloud-atmosphere-drift {
+  0% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+    opacity: 0.75;
+  }
+  33% {
+    transform: translate(-15px, 10px) scale(1.03) rotate(0.5deg);
+    opacity: 0.9;
+  }
+  66% {
+    transform: translate(15px, -10px) scale(0.97) rotate(-0.5deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-5px, -5px) scale(1.01) rotate(0.2deg);
+    opacity: 0.85;
+  }
+}
+
