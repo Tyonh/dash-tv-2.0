@@ -11,6 +11,22 @@
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css" />
+
+    <style>
+      #gato-rockero {
+        position: fixed !important; /* Faz ele flutuar sobre o mapa e dados */
+        width: 100px !important; /* Força o tamanho máximo de 100px */
+        height: auto !important;
+        z-index: 9999; /* Garante que ele fique na frente de tudo */
+        display: none; /* Começa escondido */
+      }
+      /* Força os elementos internos do Tenor a respeitarem os 100px */
+      #gato-rockero iframe,
+      #gato-rockero div {
+        width: 100px !important;
+        height: auto !important;
+      }
+    </style>
   </head>
   <body>
     <div class="main-slider">
@@ -30,6 +46,9 @@
               </div>
             </div>
             <div class="content-wrapper">
+              <div class="cards-meta-batida-wrapper" id="cards-meta-batida-wrapper" style="display: none;">
+                <div class="cards-meta-batida" id="cards-meta-batida"></div>
+              </div>
               <div class="ranking-container" id="ranking-list">
                 <div class="loading">Carregando Ranking...</div>
               </div>
@@ -117,71 +136,36 @@
             <div class="logistics-list" id="navios-content"></div>
           </div>
         </div>
-
-        <!-- LEGENDA DO MAPA OPERACIONAL -->
-        <div class="map-legend">
-          <h4>Legenda Operacional</h4>
-          <div class="legend-item">
-            <div class="legend-icon blue-pulse"></div>
-            <span>Hub Principal (Fortaleza)</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-icon red-dot"></div>
-            <span>Cidades Atendidas</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-icon route-line"></div>
-            <span>Rotas de Interligação (BRs)</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-icon radar-cloud"></div>
-            <span>Cobertura de Nuvens (Satélite)</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-icon rain-light"></div>
-            <span>Chuva Leve (Verde)</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-icon rain-medium"></div>
-            <span>Chuva Moderada (Amarelo / Laranja)</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-icon rain-heavy"></div>
-            <span>Chuva Forte / Alerta (Vermelho / Rosa)</span>
-          </div>
-        </div>
-
-        <!-- PAINEL DE MÉTRICAS REGIONAIS -->
-        <div class="map-metrics-panel">
-          <div class="metrics-title">📊 Controle Operacional Nordeste</div>
-          <div class="metrics-grid">
-            <div class="metric-card">
-              <span class="metric-label">Cidades Atendidas</span>
-              <span class="metric-value">42 Municípios</span>
-            </div>
-            <div class="metric-card">
-              <span class="metric-label">Eixos de Despacho</span>
-              <span class="metric-value">4 Rotas Ativas</span>
-            </div>
-            <div class="metric-card">
-              <span class="metric-label">Status da Frota</span>
-              <span class="metric-value">100% Operacional</span>
-            </div>
-          </div>
-        </div>
       </div>
 
-      <!-- <img
-        id="gato-dançarino"
-        src="/public/cat.gif"
-        style="display: none; position: fixed; z-index: 9999; width: 150px" />
+      <div
+        id="gato-rockero"
+        class="tenor-gif-embed"
+        data-postid="14949250962026975060"
+        data-share-method="host"
+        data-aspect-ratio="0.694301">
+        <a
+          href="https://tenor.com/view/el-gato-rockero-gif-14949250962026975060"
+          >El Gato Rockero Sticker</a
+        >
+        do
+        <a href="https://tenor.com/search/el+gato+rockero-stickers"
+          >El Gato Rockero Stickers</a
+        >
+      </div>
+      <script
+        type="text/javascript"
+        async
+        src="https://tenor.com/embed.js"></script>
 
-      <script>
+      <!-- <script>
         function iniciarGatoAleatorio() {
-          const gato = document.getElementById("gato-dançarino");
+          // Buscando pelo ID correto que setamos lá em cima
+          const gato = document.getElementById("gato-rockero");
+          if (!gato) return;
 
           function aparecer() {
-            // Define posição aleatória (mantendo margem de 150px para não fugir da tela)
+            // Sorteia a posição descontando o tamanho do gatinho para ele não sumir da tela
             const top = Math.random() * (window.innerHeight - 150);
             const left = Math.random() * (window.innerWidth - 150);
 
@@ -189,22 +173,20 @@
             gato.style.left = left + "px";
             gato.style.display = "block";
 
-            // Fica dançando por 4 segundos e depois some
+            // Fica ativo por 4 segundos
             setTimeout(() => {
               gato.style.display = "none";
 
-              // Espera um tempo aleatório entre 10 e 30 segundos para aparecer de novo
-              // Assim não fica repetitivo demais para quem está trabalhando
-              const proximaEspera = Math.random() * (3000 - 1000) + 1000;
+              // Sorteia o próximo tempo de espera (Ajustei aqui: estava rodando rápido demais no seu comentário anterior, agora espera de 10 a 30 segundos conforme o seu comentário dizia)
+              const proximaEspera = Math.random() * (30000 - 10000) + 10000;
               setTimeout(aparecer, proximaEspera);
             }, 4000);
           }
 
-          // Primeira aparição após 5 segundos que o dashboard carregar
+          // Inicia após 5 segundos do carregamento inicial
           setTimeout(aparecer, 5000);
         }
 
-        // Inicia quando a página carregar
         window.addEventListener("load", iniciarGatoAleatorio);
       </script> -->
     </div>

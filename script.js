@@ -14,8 +14,10 @@ const SHEET_URLS = {
 let mapInstance;
 
 /* --- COMPONENTES DE HIGIENIZAÇÃO DE DADOS E IMAGENS PREMIUM --- */
-const IMAGEM_PADRAO = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23cccccc'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>";
-const TROFEU_PADRAO = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffaa00'><path d='M18 2H6v2H1v6c0 3.66 2.56 6.75 6 7.74V20H5v2h14v-2h-2v-2.26c3.44-.99 6-4.08 6-7.74V4h-5V2zm-11 8V6h11v4c0 2.76-2.24 5-5 5s-5-2.24-5-5z'/></svg>";
+const IMAGEM_PADRAO =
+  "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23cccccc'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>";
+const TROFEU_PADRAO =
+  "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffaa00'><path d='M18 2H6v2H1v6c0 3.66 2.56 6.75 6 7.74V20H5v2h14v-2h-2v-2.26c3.44-.99 6-4.08 6-7.74V4h-5V2zm-11 8V6h11v4c0 2.76-2.24 5-5 5s-5-2.24-5-5z'/></svg>";
 
 const isNomeValido = (nome) => {
   if (!nome) return false;
@@ -24,11 +26,11 @@ const isNomeValido = (nome) => {
 };
 
 const obterImagemVendedor = (nome) => {
-  return isNomeValido(nome) ? `public/${nome.trim()}.png` : IMAGEM_PADRAO;
+  return isNomeValido(nome) ? `/public/${nome.trim()}.png` : IMAGEM_PADRAO;
 };
 
 const obterImagemCampeao = (nome) => {
-  return isNomeValido(nome) ? `public/${nome.trim()}.png` : TROFEU_PADRAO;
+  return isNomeValido(nome) ? `/public/${nome.trim()}.png` : TROFEU_PADRAO;
 };
 
 const formatarNome = (nome) => {
@@ -122,7 +124,7 @@ function iniciarMapa() {
     zoomSnap: 0.1,
     zoomDelta: 0.1,
   }).setView(centroNordeste, 6.5);
-  
+
   L.tileLayer("https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}", {
     maxZoom: 20,
     subdomains: ["mt0", "mt1", "mt2", "mt3"],
@@ -139,7 +141,12 @@ function iniciarMapa() {
     { nome: "Caucaia", lat: -3.72814, lng: -38.66192 },
     { nome: "São Luís", lat: -2.53067, lng: -44.29889, tipo: "capital" },
     { nome: "Sobral", lat: -3.68248, lng: -40.35358, tipo: "capital" },
-    { nome: "Juazeiro do Norte", lat: -7.2242, lng: -39.31301, tipo: "capital" },
+    {
+      nome: "Juazeiro do Norte",
+      lat: -7.2242,
+      lng: -39.31301,
+      tipo: "capital",
+    },
     { nome: "Maracanaú", lat: -3.86828, lng: -38.62645 },
     { nome: "Amontada", lat: -3.3618, lng: -39.83085 },
     { nome: "Apuiarés", lat: -3.94654, lng: -39.43049 },
@@ -182,11 +189,13 @@ function iniciarMapa() {
         className: "custom-pulse-marker blue",
         html: `<div class="pulse-ring blue"></div><div class="pulse-dot blue"></div>`,
         iconSize: [24, 24],
-        iconAnchor: [12, 12]
+        iconAnchor: [12, 12],
       });
       L.marker([cidade.lat, cidade.lng], { icon: iconeAzul })
         .addTo(mapInstance)
-        .bindPopup(`<b style="font-size: 20px;">${cidade.nome} (HUB CENTRAL)</b>`);
+        .bindPopup(
+          `<b style="font-size: 20px;">${cidade.nome} (HUB CENTRAL)</b>`,
+        );
     } else {
       // Todos os outros pontos (incluindo as capitais laranjas antigas) agora são pequenos pontos vermelhos idênticos e discretos
       L.circleMarker([cidade.lat, cidade.lng], {
@@ -204,11 +213,14 @@ function iniciarMapa() {
   // Função para calcular a distância geodésica simples entre dois pontos (Haversine)
   const calcularDistancia = (lat1, lon1, lat2, lon2) => {
     const R = 6371; // Raio da Terra em km
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLon = (lon2 - lon1) * Math.PI / 180;
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-              Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+    const dLon = ((lon2 - lon1) * Math.PI) / 180;
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((lat1 * Math.PI) / 180) *
+        Math.cos((lat2 * Math.PI) / 180) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   };
@@ -216,74 +228,110 @@ function iniciarMapa() {
   // Função para gerar uma rota curva simulando uma rodovia sinuosa (BR)
   const obterRotaRodoviaCurva = (p0, p2) => {
     const pontos = [];
-    const lat0 = p0[0], lng0 = p0[1];
-    const lat2 = p2[0], lng2 = p2[1];
-    
+    const lat0 = p0[0],
+      lng0 = p0[1];
+    const lat2 = p2[0],
+      lng2 = p2[1];
+
     const midLat = (lat0 + lat2) / 2;
     const midLng = (lng0 + lng2) / 2;
-    
+
     const dLat = lat2 - lat0;
     const dLng = lng2 - lng0;
-    
+
     // Determina a direção da curva com base em um hash simples para alternar o lado das curvas de forma orgânica
     const hash = Math.abs(lat0 + lng0 + lat2 + lng2) * 1000;
     const direcao = Math.floor(hash) % 2 === 0 ? 1 : -1;
-    
+
     const fatorCurva = 0.12 * direcao;
     const perpLat = -dLng * fatorCurva;
     const perpLng = dLat * fatorCurva;
-    
+
     const cLat = midLat + perpLat;
     const cLng = midLng + perpLng;
-    
+
     const numSegmentos = 16;
     for (let i = 0; i <= numSegmentos; i++) {
       const t = i / numSegmentos;
       const u = 1 - t;
-      
+
       // Fórmula de Bézier Quadrática
       let lat = u * u * lat0 + 2 * u * t * cLat + t * t * lat2;
       let lng = u * u * lng0 + 2 * u * t * cLng + t * t * lng2;
-      
+
       // Adiciona uma leve ondulação senoidal para imitar o traçado sinuoso real de uma rodovia (BR)
-      const ondulacao = Math.sin(t * Math.PI) * 0.015 * Math.sin(t * Math.PI * 4);
+      const ondulacao =
+        Math.sin(t * Math.PI) * 0.015 * Math.sin(t * Math.PI * 4);
       lat += ondulacao;
       lng += ondulacao;
-      
+
       pontos.push([lat, lng]);
     }
-    
+
     return pontos;
   };
 
   // Mapeamento sequencial de rotas imitando as Rodovias Federais (BRs)
   const dicionarioCidades = {};
-  cidadesVisitadas.forEach(c => {
+  cidadesVisitadas.forEach((c) => {
     dicionarioCidades[c.nome] = c;
   });
 
   const rotasBR = {
     "BR-116": [
-      "Fortaleza", "Maracanaú", "Barreira", "Redenção", "Aracoiaba", 
-      "Baturité", "Capistrano", "Itapiúna", "Quixadá", "Choró", 
-      "Banabuiú", "Quixeramobim", "Acopiara", "Juazeiro do Norte"
+      "Fortaleza",
+      "Maracanaú",
+      "Barreira",
+      "Redenção",
+      "Aracoiaba",
+      "Baturité",
+      "Capistrano",
+      "Itapiúna",
+      "Quixadá",
+      "Choró",
+      "Banabuiú",
+      "Quixeramobim",
+      "Acopiara",
+      "Juazeiro do Norte",
     ],
     "BR-222": [
-      "Fortaleza", "Caucaia", "Apuiarés", "Irauçuba", "Sobral", 
-      "Cariré", "Varjota", "Alcântaras", "Ubajara", "Tianguá", 
-      "Carnaubal", "Croatá"
+      "Fortaleza",
+      "Caucaia",
+      "Apuiarés",
+      "Irauçuba",
+      "Sobral",
+      "Cariré",
+      "Varjota",
+      "Alcântaras",
+      "Ubajara",
+      "Tianguá",
+      "Carnaubal",
+      "Croatá",
     ],
     "BR-020": [
-      "Fortaleza", "Caucaia", "Caridade", "Canindé", "Aratuba", 
-      "Boa Viagem", "Catunda", "Teresina", "São Luís"
+      "Fortaleza",
+      "Caucaia",
+      "Caridade",
+      "Canindé",
+      "Aratuba",
+      "Boa Viagem",
+      "Catunda",
+      "Teresina",
+      "São Luís",
     ],
     "BR-402": [
-      "Fortaleza", "Caucaia", "Itapipoca", "Amontada", "Itarema", 
-      "Cruz", "Vila de Jericoacoara", "Camocim", "Barroquinha", "Chaval"
+      "Fortaleza",
+      "Caucaia",
+      "Itapipoca",
+      "Amontada",
+      "Itarema",
+      "Cruz",
+      "Vila de Jericoacoara",
+      "Camocim",
+      "Barroquinha",
+      "Chaval",
     ],
-    "BR-101": [
-      "Fortaleza", "Natal", "Recife"
-    ]
+    "BR-101": ["Fortaleza", "Natal", "Recife"],
   };
 
   const conexoesDesenhadas = new Set();
@@ -292,24 +340,29 @@ function iniciarMapa() {
     for (let i = 0; i < rotaCidades.length - 1; i++) {
       const nomeA = rotaCidades[i];
       const nomeB = rotaCidades[i + 1];
-      
+
       const cidadeA = dicionarioCidades[nomeA];
       const cidadeB = dicionarioCidades[nomeB];
-      
+
       if (cidadeA && cidadeB) {
         const chave = [nomeA, nomeB].sort().join("-");
         if (!conexoesDesenhadas.has(chave)) {
           conexoesDesenhadas.add(chave);
-          
-          const rotaCurva = obterRotaRodoviaCurva([cidadeA.lat, cidadeA.lng], [cidadeB.lat, cidadeB.lng]);
-          
+
+          const rotaCurva = obterRotaRodoviaCurva(
+            [cidadeA.lat, cidadeA.lng],
+            [cidadeB.lat, cidadeB.lng],
+          );
+
           L.polyline(rotaCurva, {
             color: "#ff3333", // Vermelho das BRs
-            weight: 2.0,      // Espessura ideal para visualização na TV
-            opacity: 0.8,     // Translúcido brilhante
+            weight: 2.0, // Espessura ideal para visualização na TV
+            opacity: 0.8, // Translúcido brilhante
           })
-          .addTo(mapInstance)
-          .bindPopup(`<b style="font-size: 18px;">${nomeBR}</b><br>Trecho: ${nomeA} ⇄ ${nomeB}`);
+            .addTo(mapInstance)
+            .bindPopup(
+              `<b style="font-size: 18px;">${nomeBR}</b><br>Trecho: ${nomeA} ⇄ ${nomeB}`,
+            );
         }
       }
     }
@@ -317,42 +370,56 @@ function iniciarMapa() {
 
   // Garantia de Conectividade (Fail-safe): Se alguma cidade ficar de fora de rotasBR por erro ortográfico, conecta ao vizinho mais próximo
   const cidadesConectadas = new Set();
-  Object.values(rotasBR).forEach(rota => {
-    rota.forEach(c => cidadesConectadas.add(c));
+  Object.values(rotasBR).forEach((rota) => {
+    rota.forEach((c) => cidadesConectadas.add(c));
   });
-  
-  cidadesVisitadas.forEach(cidadeA => {
+
+  cidadesVisitadas.forEach((cidadeA) => {
     if (!cidadesConectadas.has(cidadeA.nome)) {
       let cidadeMaisProxima = null;
       let menorDistancia = Infinity;
-      cidadesVisitadas.forEach(cidadeB => {
+      cidadesVisitadas.forEach((cidadeB) => {
         if (cidadeA.nome !== cidadeB.nome) {
-          const dist = calcularDistancia(cidadeA.lat, cidadeA.lng, cidadeB.lat, cidadeB.lng);
+          const dist = calcularDistancia(
+            cidadeA.lat,
+            cidadeA.lng,
+            cidadeB.lat,
+            cidadeB.lng,
+          );
           if (dist < menorDistancia) {
             menorDistancia = dist;
             cidadeMaisProxima = cidadeB;
           }
         }
       });
-      
+
       if (cidadeMaisProxima) {
         const chave = [cidadeA.nome, cidadeMaisProxima.nome].sort().join("-");
         if (!conexoesDesenhadas.has(chave)) {
           conexoesDesenhadas.add(chave);
-          const rotaCurva = obterRotaRodoviaCurva([cidadeA.lat, cidadeA.lng], [cidadeMaisProxima.lat, cidadeMaisProxima.lng]);
+          const rotaCurva = obterRotaRodoviaCurva(
+            [cidadeA.lat, cidadeA.lng],
+            [cidadeMaisProxima.lat, cidadeMaisProxima.lng],
+          );
           L.polyline(rotaCurva, {
             color: "#ff3333",
             weight: 2.0,
             opacity: 0.8,
           })
-          .addTo(mapInstance)
-          .bindPopup(`<b>Rota de Acesso</b><br>Interligação: ${cidadeA.nome} ⇄ ${cidadeMaisProxima.nome}`);
+            .addTo(mapInstance)
+            .bindPopup(
+              `<b>Rota de Acesso</b><br>Interligação: ${cidadeA.nome} ⇄ ${cidadeMaisProxima.nome}`,
+            );
         }
       }
     }
   });
 
   adicionarRadarClima(mapInstance);
+  // Atualiza a cobertura de nuvens e radar a cada 10 minutos para manter os dados climáticos reais atualizados na TV
+  setInterval(() => {
+    adicionarRadarClima(mapInstance);
+  }, 600000);
 }
 
 function parseNumber(val) {
@@ -374,7 +441,147 @@ function iniciarRelogio() {
   }, 1000);
 }
 
-async function carregarRanking() {
+/**
+ * Retorna a segunda-feira (00:00) da semana em que a data cai.
+ * Base para definir a "1ª semana do mês" por calendário real.
+ * @param {Date} data
+ * @returns {Date}
+ */
+const inicioDaSemana = (data) => {
+  const d = new Date(data.getFullYear(), data.getMonth(), data.getDate());
+  const diaSemana = d.getDay();
+  const deslocamento = diaSemana === 0 ? -6 : 1 - diaSemana;
+  d.setDate(d.getDate() + deslocamento);
+  return d;
+};
+
+/**
+ * Verdadeiro apenas enquanto hoje estiver na MESMA semana em que caiu o dia 1º.
+ * @param {Date} [data=new Date()]
+ * @returns {boolean}
+ */
+const estaNaPrimeiraSemanaDoMes = (data = new Date()) => {
+  const primeiroDoMes = new Date(data.getFullYear(), data.getMonth(), 1);
+  return (
+    inicioDaSemana(data).getTime() === inicioDaSemana(primeiroDoMes).getTime()
+  );
+};
+
+/**
+ * @typedef {Object} VendedorRanking
+ * @property {string} nome
+ * @property {number} perc
+ */
+
+/**
+ * Renderiza os cards de destaque estilo campeão para quem atingiu 100% ou mais da meta.
+ * Na 1ª semana do mês, ocupa o espaço central de forma exclusiva (sem as barras).
+ * @param {VendedorRanking[]} bateramMeta
+ * @param {boolean} isPrimeiraSemana
+ */
+const renderizarCardsMetaBatida = (bateramMeta, isPrimeiraSemana) => {
+  const containerCardsWrapper = document.getElementById("cards-meta-batida-wrapper");
+  const containerCards = document.getElementById("cards-meta-batida");
+  const sectionRanking = document.getElementById("section-ranking");
+
+  if (!containerCards || !containerCardsWrapper || !sectionRanking) return;
+
+  if (isPrimeiraSemana) {
+    sectionRanking.classList.add("modo-primeira-semana");
+    sectionRanking.classList.remove("has-meta-batida");
+    containerCardsWrapper.style.display = "flex";
+
+    if (bateramMeta.length > 0) {
+      containerCards.className = `cards-meta-batida qtd-${bateramMeta.length} destaque-primeira-semana`;
+      containerCards.innerHTML = bateramMeta
+        .map(
+          (v) => `
+        <div class="card-campeao-mes card-meta-individual card-primeira-semana">
+          <img src="${obterImagemCampeao(v.nome)}" class="foto-grid" onerror="this.onerror=null; this.src='${TROFEU_PADRAO}';">
+          <span class="label-campeao">🏆 META 100% BATIDA 🏆</span>
+          <span class="nome-sem-grid">${formatarNome(v.nome)}</span>
+          <span class="pts-campeao">${v.perc}%</span>
+        </div>`,
+        )
+        .join("");
+    } else {
+      containerCards.className = "cards-meta-batida qtd-0 destaque-primeira-semana";
+      containerCards.innerHTML = `
+        <div class="card-campeao-mes card-meta-individual card-primeira-semana sem-meta">
+          <span class="label-campeao">🎯 META DO MÊS 🎯</span>
+          <span class="nome-sem-grid">EM BUSCA DOS 100%</span>
+          <span class="pts-campeao">PRIMEIRA SEMANA</span>
+        </div>`;
+    }
+  } else {
+    sectionRanking.classList.remove("modo-primeira-semana");
+    if (bateramMeta.length > 0) {
+      containerCardsWrapper.style.display = "block";
+      sectionRanking.classList.add("has-meta-batida");
+      containerCards.className = `cards-meta-batida qtd-${bateramMeta.length}`;
+
+      containerCards.innerHTML = bateramMeta
+        .map(
+          (v) => `
+        <div class="card-campeao-mes card-meta-individual">
+          <img src="${obterImagemCampeao(v.nome)}" class="foto-grid" onerror="this.onerror=null; this.src='${TROFEU_PADRAO}';">
+          <span class="label-campeao">🏆 META BATIDA 🏆</span>
+          <span class="nome-sem-grid">${formatarNome(v.nome)}</span>
+          <span class="pts-campeao">${v.perc}%</span>
+        </div>`,
+        )
+        .join("");
+    } else {
+      containerCardsWrapper.style.display = "none";
+      sectionRanking.classList.remove("has-meta-batida");
+      containerCards.innerHTML = "";
+    }
+  }
+};
+
+/**
+ * Renderiza a lista de barras/termômetros do ranking de todos os consultores.
+ * Na 1ª semana do mês, a lista permanece completamente oculta conforme solicitado.
+ * @param {VendedorRanking[]} dados
+ * @param {boolean} isPrimeiraSemana
+ */
+const renderizarTermometrosRanking = (dados, isPrimeiraSemana) => {
+  const rankingList = document.getElementById("ranking-list");
+  if (!rankingList) return;
+
+  if (isPrimeiraSemana) {
+    rankingList.style.display = "none";
+    rankingList.innerHTML = "";
+    return;
+  }
+
+  rankingList.style.display = "flex";
+  rankingList.innerHTML = dados
+    .map(
+      (v) => `
+    <div class="ranking-item">
+      <img src="${obterImagemVendedor(v.nome)}" class="foto-vendedor" onerror="this.onerror=null; this.src='${IMAGEM_PADRAO}';">
+      <div class="termometro-bg">
+        <div class="termometro-fill" style="width:0%" data-target="${Math.min(v.perc, 100)}"></div>
+        <div class="info-vendedor-interna"><span>${formatarNome(v.nome)}</span><span>${v.perc}%</span></div>
+      </div>
+    </div>`,
+    )
+    .join("");
+
+  setTimeout(
+    () =>
+      document
+        .querySelectorAll("#ranking-list .termometro-fill")
+        .forEach((b) => (b.style.width = b.dataset.target + "%")),
+    100,
+  );
+};
+
+/**
+ * Busca dados da planilha e atualiza ranking individual e cards de meta batida
+ */
+const carregarRanking = async () => {
   try {
     const res = await fetch(SHEET_URLS.ranking);
     const text = await res.text();
@@ -390,29 +597,16 @@ async function carregarRanking() {
         };
       })
       .sort((a, b) => b.perc - a.perc);
-    document.getElementById("ranking-list").innerHTML = dados
-      .map(
-        (v) => `
-      <div class="ranking-item">
-        <img src="${obterImagemVendedor(v.nome)}" class="foto-vendedor" onerror="this.onerror=null; this.src='${IMAGEM_PADRAO}';">
-        <div class="termometro-bg">
-          <div class="termometro-fill" style="width:0%" data-target="${Math.min(v.perc, 100)}"></div>
-          <div class="info-vendedor-interna"><span>${formatarNome(v.nome)}</span><span>${v.perc}%</span></div>
-        </div>
-      </div>`,
-      )
-      .join("");
-    setTimeout(
-      () =>
-        document
-          .querySelectorAll("#ranking-list .termometro-fill")
-          .forEach((b) => (b.style.width = b.dataset.target + "%")),
-      100,
-    );
+
+    const isPrimeiraSemana = estaNaPrimeiraSemanaDoMes();
+    const bateramMeta = dados.filter((v) => isNomeValido(v.nome) && v.perc >= 100);
+
+    renderizarCardsMetaBatida(bateramMeta, isPrimeiraSemana);
+    renderizarTermometrosRanking(dados, isPrimeiraSemana);
   } catch (e) {
-    console.error(e);
+    console.error("Erro ao carregar ranking individual:", e);
   }
-}
+};
 
 async function carregarPositivacao() {
   try {
@@ -461,6 +655,8 @@ async function carregarPositivacao() {
   }
 }
 
+
+
 async function carregarPodioCompleto() {
   document
     .querySelectorAll("#podio-mes-chart .termometro-fill")
@@ -506,8 +702,9 @@ async function carregarPodioCompleto() {
       });
 
     /* --- LÓGICA DE EXIBIÇÃO: 1ª SEMANA VS RESTO DO MÊS --- */
-    const diaAtual = new Date().getDate();
-    const isPrimeiraSemana = diaAtual <= 7;
+    // Usa a semana de calendário real (não "dia <= 7"): o campeão do mês
+    // anterior só aparece enquanto hoje estiver na 1ª semana do mês.
+    const isPrimeiraSemana = estaNaPrimeiraSemanaDoMes();
 
     // Captura o título e o container da direita para podermos manipulá-los
     const tituloDireita = document.querySelector(
@@ -516,8 +713,18 @@ async function carregarPodioCompleto() {
     const containerCampeoes = document.getElementById("campeoes-list");
 
     const meses = [
-      "JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO",
-      "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"
+      "JANEIRO",
+      "FEVEREIRO",
+      "MARÇO",
+      "ABRIL",
+      "MAIO",
+      "JUNHO",
+      "JULHO",
+      "AGOSTO",
+      "SETEMBRO",
+      "OUTUBRO",
+      "NOVEMBRO",
+      "DEZEMBRO",
     ];
     const mesAtualIndex = new Date().getMonth();
     const mesAnteriorIndex = (mesAtualIndex - 1 + 12) % 12;
@@ -526,7 +733,8 @@ async function carregarPodioCompleto() {
     // Verifica se é a primeira semana E se existem dados no ranking principal
     if (isPrimeiraSemana && pontos.length > 0) {
       // Altera o título dinamicamente para o mês anterior (mês que ele ganhou)
-      if (tituloDireita) tituloDireita.innerText = `CAMPEÃO DE ${nomeMesAnterior}`;
+      if (tituloDireita)
+        tituloDireita.innerText = `CAMPEÃO DE ${nomeMesAnterior}`;
 
       // Troca a classe para remover a grelha 2x2 e permitir o alinhamento central
       containerCampeoes.className = "campeao-mes-unico";
@@ -549,20 +757,18 @@ async function carregarPodioCompleto() {
 
       containerCampeoes.innerHTML = campeoes
         .slice(0, 5)
-        .map(
-          (c) => {
-            if (!isNomeValido(c.nome)) {
-              return `<div class="card-campeao-grid-vazio"></div>`;
-            }
-            return `
+        .map((c) => {
+          if (!isNomeValido(c.nome)) {
+            return `<div class="card-campeao-grid-vazio"></div>`;
+          }
+          return `
             <div class="card-campeao-grid">
               <img src="${obterImagemCampeao(c.nome)}" class="foto-grid" onerror="this.onerror=null; this.src='${TROFEU_PADRAO}';">
               <span class="label-sem-grid">${c.sem}</span>
               <span class="nome-sem-grid">${formatarNome(c.nome)}</span>
               <span class="nome-sem-grid">Pontos ${c.pontos}</span>
             </div>`;
-          }
-        )
+        })
         .join("");
     }
 
@@ -593,9 +799,8 @@ function atualizarData() {
     "NOVEMBRO",
     "DEZEMBRO",
   ];
-  
+
   const dataAtual = new Date();
-  const diaAtual = dataAtual.getDate();
   const mesAtualIndex = dataAtual.getMonth();
 
   // Positivação/Target sempre mostra o mês comercial atual
@@ -603,8 +808,11 @@ function atualizarData() {
     .querySelectorAll("#section-positivacao .mes-atual")
     .forEach((el) => (el.innerText = meses[mesAtualIndex]));
 
-  // O Pódio do Mês mostra o mês encerrado (anterior) se estiver na 1ª semana do mês posterior (dia <= 7)
-  const mesPodioIndex = diaAtual <= 7 ? (mesAtualIndex - 1 + 12) % 12 : mesAtualIndex;
+  // O Pódio do Mês mostra o mês encerrado (anterior) só durante a 1ª semana
+  // de calendário do mês posterior (mesma regra do card de campeão).
+  const mesPodioIndex = estaNaPrimeiraSemanaDoMes(dataAtual)
+    ? (mesAtualIndex - 1 + 12) % 12
+    : mesAtualIndex;
   document
     .querySelectorAll("#section-podio .mes-atual")
     .forEach((el) => (el.innerText = meses[mesPodioIndex]));
@@ -612,24 +820,6 @@ function atualizarData() {
 /* --- ATUALIZAÇÃO DE NAVIOS E LOGÍSTICA (ALINHAMENTO EM COLUNAS) --- */
 function atualizarInfoNavios() {
   const conteineres = [
-     {
-      id: "1",
-      nome: "EBRON PRO",
-      saida: "20/02/2026",
-      chegada: "20/04/2026",
-    },
-    {
-      id: "2",
-      nome: "REFLE/RGB/SOLAR",
-      saida: "15/06/2026",
-      chegada: "--/--/----",
-    },
-    {
-      id: "3",
-      nome: "HOMOLOGADA",
-      saida: "15/05/2026",
-      chegada: "--/--/----",
-    },
     {
       id: "4",
       nome: "NATALINO 1",
@@ -684,11 +874,18 @@ function atualizarInfoNavios() {
   }
 }
 
+let cloudLayer = null;
+let rainLayer = null;
+let cloudOverlay = null;
+
 /* --- CAMADA DE CLIMA EM TEMPO REAL (SIMULADOR DE NUVENS PREMIUM + RADAR DE CHUVA DA TV) --- */
 const adicionarRadarClima = async (mapa) => {
   // 1. Tentar carregar a chave de config.json local para evitar vazamentos de segredos no Git
-  let chaveAtiva = typeof OPENWEATHER_API_KEY !== "undefined" ? OPENWEATHER_API_KEY : "SUA_API_KEY_AQUI";
-  
+  let chaveAtiva =
+    typeof OPENWEATHER_API_KEY !== "undefined"
+      ? OPENWEATHER_API_KEY
+      : "SUA_API_KEY_AQUI";
+
   if (chaveAtiva === "SUA_API_KEY_AQUI") {
     try {
       const resConfig = await fetch("config.json");
@@ -704,82 +901,118 @@ const adicionarRadarClima = async (mapa) => {
   }
 
   // Verificar se a chave ativa final é válida
-  const temChaveValida = chaveAtiva && 
-                         chaveAtiva !== "SUA_API_KEY_AQUI" && 
-                         chaveAtiva.trim() !== "";
+  const temChaveValida =
+    chaveAtiva && chaveAtiva !== "SUA_API_KEY_AQUI" && chaveAtiva.trim() !== "";
 
   if (temChaveValida) {
-    // Adiciona a camada de nuvens reais em tempo real da API do OpenWeatherMap
-    const urlNuvensReais = `https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${chaveAtiva.trim()}`;
-    L.tileLayer(urlNuvensReais, {
-      opacity: 0.50, // Translúcido para ver as cidades e relevo embaixo
-      zIndex: 4,
-      attribution: "&copy; OpenWeatherMap"
-    }).addTo(mapa);
-    console.log("Camada de nuvens REAIS em tempo real do OpenWeatherMap ativada!");
+    // Se o simulador estiver ativo no mapa, remove ele
+    if (cloudOverlay) {
+      mapa.removeLayer(cloudOverlay);
+      cloudOverlay = null;
+    }
+
+    // Calcula um timestamp que muda a cada 10 minutos (600.000 ms)
+    // Isso garante que o navegador faça cache das imagens dos blocos (tiles) dentro desse intervalo
+    // e só busque novos blocos no servidor da API quando os 10 minutos passarem.
+    const timestampCache = Math.floor(Date.now() / 600000);
+    const urlNuvensReais = `https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${chaveAtiva.trim()}&_=${timestampCache}`;
+
+    if (cloudLayer) {
+      cloudLayer.setUrl(urlNuvensReais);
+      console.log("Camada de nuvens reais (OpenWeatherMap) atualizada!");
+    } else {
+      cloudLayer = L.tileLayer(urlNuvensReais, {
+        opacity: 1.0, // Opacidade total (100%) idêntica à do site oficial da API
+        zIndex: 4,
+        attribution: "&copy; OpenWeatherMap",
+      }).addTo(mapa);
+      console.log(
+        "Camada de nuvens reais (OpenWeatherMap) ativada com opacidade de 100%!",
+      );
+    }
   } else {
-    // Criar e adicionar o simulador de nuvens dinâmicas sobre o Ceará e Nordeste
-    // Este simulador garante que o mapa NUNCA fique vazio/sem nuvens (já que a API de satélite do RainViewer foi descontinuada em 2026)
-    const svgNuvens = `
-    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 800'>
-      <defs>
-        <filter id='blur-premium'>
-          <feGaussianBlur stdDeviation='45' />
-        </filter>
-      </defs>
-      <g filter='url(#blur-premium)' fill='#ffffff'>
-        <!-- Bloco de Nuvem Principal - Fortaleza e Litoral Norte do Ceará -->
-        <ellipse cx='500' cy='300' rx='200' ry='120' opacity='0.38' />
-        <ellipse cx='580' cy='270' rx='140' ry='100' opacity='0.42' />
-        <ellipse cx='420' cy='320' rx='130' ry='90' opacity='0.32' />
-        
-        <!-- Bloco de Nuvem Região Sul - Cariri e Juazeiro do Norte -->
-        <ellipse cx='480' cy='550' rx='160' ry='100' opacity='0.35' />
-        <ellipse cx='520' cy='580' rx='110' ry='80' opacity='0.38' />
-        
-        <!-- Bloco de Nuvem Oeste - Sobral, Tianguá e Piauí -->
-        <ellipse cx='280' cy='260' rx='180' ry='110' opacity='0.34' />
-        <ellipse cx='200' cy='290' rx='120' ry='90' opacity='0.28' />
-        
-        <!-- Bloco de Nuvem Leste - Natal, João Pessoa e Recife -->
-        <ellipse cx='780' cy='380' rx='190' ry='120' opacity='0.30' />
-        <ellipse cx='840' cy='400' rx='130' ry='95' opacity='0.36' />
-        <ellipse cx='720' cy='360' rx='110' ry='85' opacity='0.26' />
-      </g>
-    </svg>
-    `;
+    // Se o simulador de nuvens em SVG estático/animado ainda não foi criado, cria e adiciona uma única vez
+    if (!cloudOverlay) {
+      // Criar e adicionar o simulador de nuvens dinâmicas sobre o Ceará e Nordeste
+      // Este simulador garante que o mapa NUNCA fique vazio/sem nuvens se não houver uma API Key configurada
+      const svgNuvens = `
+      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 800'>
+        <defs>
+          <filter id='blur-premium'>
+            <feGaussianBlur stdDeviation='45' />
+          </filter>
+        </defs>
+        <g filter='url(#blur-premium)' fill='#ffffff'>
+          <!-- Bloco de Nuvem Principal - Fortaleza e Litoral Norte do Ceará (Opacidades aumentadas para maior visibilidade) -->
+          <ellipse cx='500' cy='300' rx='200' ry='120' opacity='0.78' />
+          <ellipse cx='580' cy='270' rx='140' ry='100' opacity='0.82' />
+          <ellipse cx='420' cy='320' rx='130' ry='90' opacity='0.72' />
+          
+          <!-- Bloco de Nuvem Região Sul - Cariri e Juazeiro do Norte -->
+          <ellipse cx='480' cy='550' rx='160' ry='100' opacity='0.75' />
+          <ellipse cx='520' cy='580' rx='110' ry='80' opacity='0.78' />
+          
+          <!-- Bloco de Nuvem Oeste - Sobral, Tianguá e Piauí -->
+          <ellipse cx='280' cy='260' rx='180' ry='110' opacity='0.74' />
+          <ellipse cx='200' cy='290' rx='120' ry='90' opacity='0.68' />
+          
+          <!-- Bloco de Nuvem Leste - Natal, João Pessoa e Recife -->
+          <ellipse cx='780' cy='380' rx='190' ry='120' opacity='0.70' />
+          <ellipse cx='840' cy='400' rx='130' ry='95' opacity='0.76' />
+          <ellipse cx='720' cy='360' rx='110' ry='85' opacity='0.66' />
+        </g>
+      </svg>
+      `;
 
-    // Converter para URL base64 segura para Leaflet
-    const cloudDataUrl = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgNuvens)));
+      // Converter para URL base64 segura para Leaflet
+      const cloudDataUrl =
+        "data:image/svg+xml;base64," +
+        btoa(unescape(encodeURIComponent(svgNuvens)));
 
-    // Bounding box geográfica para cobrir perfeitamente o Ceará e Nordeste
-    // Cobre de Latitude -12.0 (Sul) a +1.0 (Norte), e Longitude -46.0 (Oeste) a -32.0 (Leste)
-    const limitesNuvens = [[-12.0, -46.0], [1.0, -32.0]];
+      // Bounding box geográfica para cobrir perfeitamente o Ceará e Nordeste
+      const limitesNuvens = [
+        [-12.0, -46.0],
+        [1.0, -32.0],
+      ];
 
-    // Adiciona a cobertura de nuvens dinâmicas ao mapa
-    L.imageOverlay(cloudDataUrl, limitesNuvens, {
-      opacity: 0.85,
-      zIndex: 4,
-      className: "animated-clouds"
-    }).addTo(mapa);
-    console.log("Simulador de nuvens dinâmicas premium ativado com sucesso!");
+      // Adiciona a cobertura de nuvens dinâmicas ao mapa
+      cloudOverlay = L.imageOverlay(cloudDataUrl, limitesNuvens, {
+        opacity: 0.95, // Aumentado de 0.85 para 0.95 para maior contraste e visualização
+        zIndex: 4,
+        className: "animated-clouds",
+      }).addTo(mapa);
+      console.log(
+        "Simulador de nuvens dinâmicas premium ativado com opacidade reforçada!",
+      );
+    }
   }
 
-  // 2. Tenta carregar a camada de chuva real (radar meteorológico de alta definição da TV)
+  // 2. Tenta carregar/atualizar a camada de chuva real do radar meteorológico do RainViewer (sempre gratuito)
   try {
-    const res = await fetch("https://api.rainviewer.com/public/weather-maps.json");
+    const res = await fetch(
+      "https://api.rainviewer.com/public/weather-maps.json",
+    );
     const data = await res.json();
 
     if (data.radar && data.radar.past && data.radar.past.length > 0) {
       const ultimoRadar = data.radar.past[data.radar.past.length - 1].path;
-      // Paleta 1 = Paleta Rainbow (verdes para chuva leve, amarelo/laranja moderada, vermelho/rosa severa)
       // zIndex 5 = Acima das nuvens e relevo, garantindo a perfeita visualização dos temporais da TV
       const urlChuva = `https://tilecache.rainviewer.com${ultimoRadar}/256/{z}/{x}/{y}/1/1_1.png`;
-      L.tileLayer(urlChuva, {
-        opacity: 0.70,
-        zIndex: 5,
-      }).addTo(mapa);
-      console.log("Camada de radar de chuva em tempo real ativada com sucesso!");
+
+      if (rainLayer) {
+        rainLayer.setUrl(urlChuva);
+        console.log(
+          "Camada de radar de chuva em tempo real atualizada com sucesso!",
+        );
+      } else {
+        rainLayer = L.tileLayer(urlChuva, {
+          opacity: 0.7,
+          zIndex: 5,
+        }).addTo(mapa);
+        console.log(
+          "Camada de radar de chuva em tempo real inicializada com sucesso!",
+        );
+      }
     }
   } catch (erro) {
     console.warn("Erro ao buscar dados reais do radar RainViewer:", erro);

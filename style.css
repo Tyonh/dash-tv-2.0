@@ -550,6 +550,221 @@ body {
 }
 
 /* ====================================================================
+   CARDS DE META BATIDA (100%+) NO RANKING INDIVIDUAL
+   ==================================================================== */
+.cards-meta-batida-wrapper {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.cards-meta-batida {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.card-meta-individual {
+  flex: 1 1 0;
+  max-width: 235px;
+  min-width: 180px;
+  padding: 12px 10px;
+  border-radius: 12px;
+  border-bottom: 5px solid #ffaa00;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  animation: pulse-gold 2.5s infinite;
+  box-sizing: border-box;
+}
+
+/* Quando apenas 1 pessoa bate a meta, card ganha destaque ampliado */
+.cards-meta-batida.qtd-1 .card-meta-individual {
+  max-width: 290px;
+  padding: 16px 20px;
+}
+
+.cards-meta-batida.qtd-1 .card-meta-individual .foto-grid {
+  width: 90px;
+  height: 90px;
+}
+
+.card-meta-individual .foto-grid {
+  width: 70px;
+  height: 70px;
+  border: 3px solid #ffaa00;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 6px;
+}
+
+.card-meta-individual .label-campeao {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #ffaa00;
+  margin-bottom: 3px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.card-meta-individual .nome-sem-grid {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--cinza-escuro);
+  line-height: 1.2;
+}
+
+.card-meta-individual .pts-campeao {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--vermelho);
+  margin-top: 4px;
+}
+
+/* Ajustes dinâmicos na lista de ranking quando houver cards de meta batida */
+.has-meta-batida .ranking-container {
+  gap: 10px;
+}
+
+.has-meta-batida .ranking-item .foto-vendedor {
+  width: 48px;
+  height: 48px;
+}
+
+.has-meta-batida .ranking-item .termometro-bg {
+  height: 38px;
+}
+
+.has-meta-batida .ranking-item .info-vendedor-interna {
+  font-size: 1.15rem;
+  padding: 0 15px;
+}
+
+/* ====================================================================
+   DESTAQUE EXCLUSIVO DA 1ª SEMANA DO MÊS (SEM BARRAS)
+   ==================================================================== */
+.modo-primeira-semana .cards-meta-batida-wrapper {
+  margin-bottom: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modo-primeira-semana .destaque-primeira-semana {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  height: 100%;
+}
+
+/* Card individual em destaque na 1ª semana */
+.card-primeira-semana {
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Quando apenas 1 pessoa bateu a meta na 1ª semana: card grande e centralizado */
+.destaque-primeira-semana.qtd-1 .card-primeira-semana {
+  max-width: 340px;
+  padding: 25px 30px;
+  border-bottom: 6px solid #ffaa00;
+}
+
+.destaque-primeira-semana.qtd-1 .card-primeira-semana .foto-grid {
+  width: 140px;
+  height: 140px;
+  border: 4px solid #ffaa00;
+  margin-bottom: 12px;
+}
+
+.destaque-primeira-semana.qtd-1 .card-primeira-semana .label-campeao {
+  font-size: 1.15rem;
+  margin-bottom: 6px;
+}
+
+.destaque-primeira-semana.qtd-1 .card-primeira-semana .nome-sem-grid {
+  font-size: 1.7rem;
+  line-height: 1.2;
+}
+
+.destaque-primeira-semana.qtd-1 .card-primeira-semana .pts-campeao {
+  font-size: 1.6rem;
+  margin-top: 8px;
+}
+
+/* Quando 2 pessoas bateram a meta na 1ª semana */
+.destaque-primeira-semana.qtd-2 .card-primeira-semana {
+  max-width: 280px;
+  padding: 20px;
+  border-bottom: 6px solid #ffaa00;
+}
+
+.destaque-primeira-semana.qtd-2 .card-primeira-semana .foto-grid {
+  width: 110px;
+  height: 110px;
+  border: 4px solid #ffaa00;
+  margin-bottom: 10px;
+}
+
+.destaque-primeira-semana.qtd-2 .card-primeira-semana .nome-sem-grid {
+  font-size: 1.4rem;
+}
+
+.destaque-primeira-semana.qtd-2 .card-primeira-semana .pts-campeao {
+  font-size: 1.45rem;
+}
+
+/* Quando 3 pessoas bateram a meta na 1ª semana */
+.destaque-primeira-semana.qtd-3 .card-primeira-semana {
+  max-width: 250px;
+  padding: 18px;
+  border-bottom: 5px solid #ffaa00;
+}
+
+.destaque-primeira-semana.qtd-3 .card-primeira-semana .foto-grid {
+  width: 95px;
+  height: 95px;
+}
+
+.destaque-primeira-semana.qtd-3 .card-primeira-semana .nome-sem-grid {
+  font-size: 1.3rem;
+}
+
+.destaque-primeira-semana.qtd-3 .card-primeira-semana .pts-campeao {
+  font-size: 1.35rem;
+}
+
+/* Quando todos os 4 baterem a meta na 1ª semana */
+.destaque-primeira-semana.qtd-4 .card-primeira-semana {
+  max-width: 230px;
+  padding: 16px 12px;
+  border-bottom: 5px solid #ffaa00;
+}
+
+.destaque-primeira-semana.qtd-4 .card-primeira-semana .foto-grid {
+  width: 85px;
+  height: 85px;
+}
+
+.destaque-primeira-semana.qtd-4 .card-primeira-semana .nome-sem-grid {
+  font-size: 1.2rem;
+}
+
+.destaque-primeira-semana.qtd-4 .card-primeira-semana .pts-campeao {
+  font-size: 1.3rem;
+}
+
+/* Estado de busca caso ninguém tenha batido ainda na 1ª semana */
+.card-primeira-semana.sem-meta {
+  max-width: 320px;
+  padding: 30px;
+  border-bottom: 5px solid var(--cinza-escuro);
+  animation: none;
+}
+
+/* ====================================================================
    ESTILOS DE LOGÍSTICA & CLIMA DO MAPA ATIVO
    ==================================================================== */
 
@@ -619,168 +834,6 @@ body {
   }
 }
 
-/* Legenda Operacional Flutuante do Mapa */
-.map-legend {
-  position: absolute;
-  bottom: 240px; /* Acima do novo painel de métricas do rodapé */
-  left: 30px;
-  background: rgba(30, 30, 30, 0.85);
-  border: 2px solid rgba(255, 170, 0, 0.7);
-  border-radius: 10px;
-  padding: 15px 20px;
-  color: #fff;
-  z-index: 2000;
-  font-family: 'Poppins', sans-serif;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(8px);
-}
-
-.map-legend h4 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  color: #ffaa00;
-  letter-spacing: 1px;
-  border-bottom: 1px solid rgba(255, 170, 0, 0.3);
-  padding-bottom: 5px;
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 0.9rem;
-  margin-bottom: 8px;
-  font-weight: 500;
-}
-
-.legend-item:last-child {
-  margin-bottom: 0;
-}
-
-.legend-icon {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.legend-icon.blue-pulse {
-  background: #3498db;
-  border: 1px solid #fff;
-  box-shadow: 0 0 5px #3498db;
-}
-
-.legend-icon.red-dot {
-  background: #ff4444;
-  border: 1px solid #fff;
-}
-
-.legend-icon.route-line {
-  width: 25px;
-  height: 2px;
-  border-radius: 1px;
-  background: #ff3333;
-}
-
-.legend-icon.radar-cloud {
-  width: 18px;
-  height: 12px;
-  border-radius: 4px;
-  background: rgba(240, 240, 240, 0.75);
-  box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.legend-icon.rain-light {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: #00e676;
-  border: 1px solid #fff;
-  box-shadow: 0 0 5px #00e676;
-}
-
-.legend-icon.rain-medium {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: #ffeb3b;
-  border: 1px solid #fff;
-  box-shadow: 0 0 5px #ffeb3b;
-}
-
-.legend-icon.rain-heavy {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: #ff1744;
-  border: 1px solid #fff;
-  box-shadow: 0 0 5px #ff1744;
-}
-
-/* Painel de Métricas do Rodapé do Mapa */
-.map-metrics-panel {
-  position: absolute;
-  bottom: 30px;
-  left: 30px;
-  right: 30px;
-  background: rgba(30, 30, 30, 0.9);
-  border: 3px solid #ffaa00;
-  border-radius: 12px;
-  z-index: 2000;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px);
-}
-
-.metrics-title {
-  background: #ffaa00;
-  color: #000;
-  padding: 8px 0;
-  font-weight: 800;
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  text-align: center;
-  letter-spacing: 2px;
-}
-
-.metrics-grid {
-  padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-}
-
-.metric-card {
-  flex: 1;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  border-right: 1px solid rgba(255, 170, 0, 0.3);
-}
-
-.metric-card:last-child {
-  border-right: none;
-}
-
-.metric-label {
-  color: #ccc;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-
-.metric-value {
-  color: #ffaa00;
-  font-size: 1.3rem;
-  font-weight: 800;
-}
 
 /* ====================================================================
    NUVENS OPERACIONAIS DINÂMICAS (SIMULADOR DE ATMOSFERA PREMIUM)
