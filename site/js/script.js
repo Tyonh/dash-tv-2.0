@@ -672,8 +672,10 @@ async function carregarPodioCompleto() {
       .slice(1)
       .map((l) => {
         const c = l.split(",");
-        return { nome: c[0].trim(), pts: parseInt(c[1]) };
+        return { nome: (c[0] || "").trim(), pts: parseInt(c[1]) };
       })
+      // Ignora linhas vazias/lixo da planilha (nome em branco ou pontos inválidos)
+      .filter((d) => isNomeValido(d.nome) && Number.isFinite(d.pts))
       .sort((a, b) => b.pts - a.pts);
 
     const max = Math.max(...pontos.map((d) => d.pts)) || 1;
