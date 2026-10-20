@@ -1,3 +1,8 @@
+# Segredos (nunca versionar) - vale para qualquer pasta, inclusive site/config.json
 config.json
 config.js
 .env
+
+# Sistema / editor
+.DS_Store
+Thumbs.db

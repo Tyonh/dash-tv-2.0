@@ -26,11 +26,11 @@ const isNomeValido = (nome) => {
 };
 
 const obterImagemVendedor = (nome) => {
-  return isNomeValido(nome) ? `/public/${nome.trim()}.png` : IMAGEM_PADRAO;
+  return isNomeValido(nome) ? `img/${nome.trim()}.png` : IMAGEM_PADRAO;
 };
 
 const obterImagemCampeao = (nome) => {
-  return isNomeValido(nome) ? `/public/${nome.trim()}.png` : TROFEU_PADRAO;
+  return isNomeValido(nome) ? `img/${nome.trim()}.png` : TROFEU_PADRAO;
 };
 
 const formatarNome = (nome) => {
