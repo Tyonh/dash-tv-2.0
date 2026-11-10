@@ -1,0 +1,260 @@
+{
+  ".claude/launch.json": {
+    "mtime": 1794246675.5058954,
+    "seen": 1794323133.3149016,
+    "ast_hash": "f756136a09e782831259bf20bed93bff",
+    "semantic_hash": "f756136a09e782831259bf20bed93bff"
+  },
+  ".vscode/settings.json": {
+    "mtime": 1792523924.1461184,
+    "seen": 1794323133.3149078,
+    "ast_hash": "53c7cfafbcadecaf5bdfa790cca88ede",
+    "semantic_hash": "53c7cfafbcadecaf5bdfa790cca88ede"
+  },
+  "app/api/orcamentos/route.ts": {
+    "mtime": 1794246495.5181017,
+    "seen": 1794323133.314911,
+    "ast_hash": "ebe3a552d659060998660be55fccf513",
+    "semantic_hash": "ebe3a552d659060998660be55fccf513"
+  },
+  "app/layout.tsx": {
+    "mtime": 1794246243.4227097,
+    "seen": 1794323133.3149128,
+    "ast_hash": "88ed5f614dd1060476870587a2b9e632",
+    "semantic_hash": "88ed5f614dd1060476870587a2b9e632"
+  },
+  "app/page.tsx": {
+    "mtime": 1794246594.053231,
+    "seen": 1794323133.3149142,
+    "ast_hash": "933fa3a7c00f86d94b88e61db96eb654",
+    "semantic_hash": "933fa3a7c00f86d94b88e61db96eb654"
+  },
+  "components/Dashboard.tsx": {
+    "mtime": 1794246591.8580492,
+    "seen": 1794323133.314916,
+    "ast_hash": "51543e1277400d2ba5787e465ceb03a7",
+    "semantic_hash": "51543e1277400d2ba5787e465ceb03a7"
+  },
+  "components/LogisticsPanel.tsx": {
+    "mtime": 1794246589.7873304,
+    "seen": 1794323133.3149173,
+    "ast_hash": "7a8ebc330f6ae2e520e2e49a886c277c",
+    "semantic_hash": "7a8ebc330f6ae2e520e2e49a886c277c"
+  },
+  "components/dashboard/CardMeta.tsx": {
+    "mtime": 1794246609.4775112,
+    "seen": 1794323133.314919,
+    "ast_hash": "bd04612a1cc9110c80e0efb91d6f17c4",
+    "semantic_hash": "bd04612a1cc9110c80e0efb91d6f17c4"
+  },
+  "components/dashboard/Clock.tsx": {
+    "mtime": 1794246327.7646472,
+    "seen": 1794323133.3149204,
+    "ast_hash": "82fc67113bb4e5e6a67916dc043b09d3",
+    "semantic_hash": "82fc67113bb4e5e6a67916dc043b09d3"
+  },
+  "components/dashboard/DataSlide.tsx": {
+    "mtime": 1794246437.32575,
+    "seen": 1794323133.314922,
+    "ast_hash": "9ad09158289d9218072695a1a8d83302",
+    "semantic_hash": "9ad09158289d9218072695a1a8d83302"
+  },
+  "components/dashboard/Foto.tsx": {
+    "mtime": 1794246295.3764832,
+    "seen": 1794323133.3149235,
+    "ast_hash": "206d4fde8fbb8998ea8ce22cf7563dd9",
+    "semantic_hash": "206d4fde8fbb8998ea8ce22cf7563dd9"
+  },
+  "components/dashboard/NewsTicker.tsx": {
+    "mtime": 1794246609.4790177,
+    "seen": 1794323133.3149252,
+    "ast_hash": "b2ec79b0fb2b715628b95be6928fc5ca",
+    "semantic_hash": "b2ec79b0fb2b715628b95be6928fc5ca"
+  },
+  "components/dashboard/PodioSection.tsx": {
+    "mtime": 1794246609.4775112,
+    "seen": 1794323133.3149266,
+    "ast_hash": "22e4a8698d7e0e9062d17bf6c3aab35a",
+    "semantic_hash": "22e4a8698d7e0e9062d17bf6c3aab35a"
+  },
+  "components/dashboard/PositivacaoSection.tsx": {
+    "mtime": 1794246429.9994998,
+    "seen": 1794323133.314928,
+    "ast_hash": "58d718eb4ed409d1673da4c27489528d",
+    "semantic_hash": "58d718eb4ed409d1673da4c27489528d"
+  },
+  "components/dashboard/RankingSection.tsx": {
+    "mtime": 1794246428.802619,
+    "seen": 1794323133.3149295,
+    "ast_hash": "7b565d172300cfd8eda916ea02e7dbe2",
+    "semantic_hash": "7b565d172300cfd8eda916ea02e7dbe2"
+  },
+  "components/dashboard/SectionHeader.tsx": {
+    "mtime": 1794246325.9909,
+    "seen": 1794323133.314931,
+    "ast_hash": "bcd02cfeb15b2c89e8476941accfbc2e",
+    "semantic_hash": "bcd02cfeb15b2c89e8476941accfbc2e"
+  },
+  "components/dashboard/WeatherWidget.tsx": {
+    "mtime": 1794246435.3906543,
+    "seen": 1794323133.314932,
+    "ast_hash": "7ff0a337fcff989209c25cbbf66048f2",
+    "semantic_hash": "7ff0a337fcff989209c25cbbf66048f2"
+  },
+  "components/map/MapSlide.tsx": {
+    "mtime": 1794246587.9136727,
+    "seen": 1794323133.3149338,
+    "ast_hash": "ec4597ef295c3432110e96ac226d8d19",
+    "semantic_hash": "ec4597ef295c3432110e96ac226d8d19"
+  },
+  "components/map/calor.ts": {
+    "mtime": 1794246586.2492304,
+    "seen": 1794323133.3149352,
+    "ast_hash": "9e63c9e9794f12f609562478c5e51dd4",
+    "semantic_hash": "9e63c9e9794f12f609562478c5e51dd4"
+  },
+  "components/map/camadas.ts": {
+    "mtime": 1794246583.6008885,
+    "seen": 1794323133.3149366,
+    "ast_hash": "74b96f21bd6d2872331100b33c985492",
+    "semantic_hash": "74b96f21bd6d2872331100b33c985492"
+  },
+  "components/map/clima.ts": {
+    "mtime": 1794246584.7973566,
+    "seen": 1794323133.314938,
+    "ast_hash": "084d3cd8ff7a8d09821078c2a4b4a8bf",
+    "semantic_hash": "084d3cd8ff7a8d09821078c2a4b4a8bf"
+  },
+  "docker-compose.yml": {
+    "mtime": 1792523862.8175752,
+    "seen": 1794323133.3149397,
+    "ast_hash": "1a1e71d843c560575019561258a381c5",
+    "semantic_hash": "1a1e71d843c560575019561258a381c5"
+  },
+  "hooks/useAsync.ts": {
+    "mtime": 1794246243.4917958,
+    "seen": 1794323133.3149412,
+    "ast_hash": "f98943e44ac74d9b8e9ac63cad570e3e",
+    "semantic_hash": "f98943e44ac74d9b8e9ac63cad570e3e"
+  },
+  "hooks/useGrow.ts": {
+    "mtime": 1794246243.4631405,
+    "seen": 1794323133.3149428,
+    "ast_hash": "baeef92cd8984e3b08a52c1717a6574e",
+    "semantic_hash": "baeef92cd8984e3b08a52c1717a6574e"
+  },
+  "lib/cidades.ts": {
+    "mtime": 1794246243.3219125,
+    "seen": 1794323133.314944,
+    "ast_hash": "ee9baf1c08dfc8198064761679f39c3f",
+    "semantic_hash": "ee9baf1c08dfc8198064761679f39c3f"
+  },
+  "lib/constants.ts": {
+    "mtime": 1794246224.6650734,
+    "seen": 1794323133.3149455,
+    "ast_hash": "cbc1af9f6b69cf74a42c6d5ab84ac093",
+    "semantic_hash": "cbc1af9f6b69cf74a42c6d5ab84ac093"
+  },
+  "lib/format.ts": {
+    "mtime": 1794246224.6948445,
+    "seen": 1794323133.3149471,
+    "ast_hash": "6a7a23cda3190a06019bfb63be8a8425",
+    "semantic_hash": "6a7a23cda3190a06019bfb63be8a8425"
+  },
+  "lib/geo.ts": {
+    "mtime": 1794246243.3599157,
+    "seen": 1794323133.3149486,
+    "ast_hash": "ba873ed5647eee27bfea46c846d77b6b",
+    "semantic_hash": "ba873ed5647eee27bfea46c846d77b6b"
+  },
+  "lib/orcamentos.ts": {
+    "mtime": 1794246497.0717323,
+    "seen": 1794323133.31495,
+    "ast_hash": "f31e935d156a78d8427aa6c08311d591",
+    "semantic_hash": "f31e935d156a78d8427aa6c08311d591"
+  },
+  "lib/semana.ts": {
+    "mtime": 1794246224.7254703,
+    "seen": 1794323133.3149514,
+    "ast_hash": "dd5f7ff94263e6b2ffdbf1c3bdcc14b2",
+    "semantic_hash": "dd5f7ff94263e6b2ffdbf1c3bdcc14b2"
+  },
+  "lib/server/orcamentos.ts": {
+    "mtime": 1794247232.0347476,
+    "seen": 1794323133.3149529,
+    "ast_hash": "b5ec7749544f023541aa4e45ac7b10ea",
+    "semantic_hash": "b5ec7749544f023541aa4e45ac7b10ea"
+  },
+  "lib/sheets.ts": {
+    "mtime": 1794246224.7563484,
+    "seen": 1794323133.3149545,
+    "ast_hash": "75eb589a79a6993180b117cb90cbd18d",
+    "semantic_hash": "75eb589a79a6993180b117cb90cbd18d"
+  },
+  "lib/types.ts": {
+    "mtime": 1794246224.6365511,
+    "seen": 1794323133.314956,
+    "ast_hash": "03360c8092d728bf6a33c87dc8f71cbc",
+    "semantic_hash": "03360c8092d728bf6a33c87dc8f71cbc"
+  },
+  "next.config.ts": {
+    "mtime": 1794246224.5387905,
+    "seen": 1794323133.3149576,
+    "ast_hash": "d03df5199d283815f15b80525b974678",
+    "semantic_hash": "d03df5199d283815f15b80525b974678"
+  },
+  "package.json": {
+    "mtime": 1794246632.9930084,
+    "seen": 1794323133.3149588,
+    "ast_hash": "c9944a63328c6a0bbf8d976f740dc7ee",
+    "semantic_hash": "c9944a63328c6a0bbf8d976f740dc7ee"
+  },
+  "postcss.config.mjs": {
+    "mtime": 1794246224.5672996,
+    "seen": 1794323133.3149605,
+    "ast_hash": "f71b80f5685810aa6afdd8c6b4ca0b31",
+    "semantic_hash": "f71b80f5685810aa6afdd8c6b4ca0b31"
+  },
+  "scripts/gerar-orcamentos-por-cidade.mjs": {
+    "mtime": 1794245673.9197805,
+    "seen": 1794323133.314962,
+    "ast_hash": "db3966e224a1887e5380e48bd9ab525c",
+    "semantic_hash": "db3966e224a1887e5380e48bd9ab525c"
+  },
+  "site/config.example.json": {
+    "mtime": 1792523860.2677493,
+    "seen": 1794323133.314963,
+    "ast_hash": "606f5eae39d97b678cc2d5024b6df752",
+    "semantic_hash": "606f5eae39d97b678cc2d5024b6df752"
+  },
+  "site/data/orcamentos-por-cidade.json": {
+    "mtime": 1794245673.860259,
+    "seen": 1794323133.3149648,
+    "ast_hash": "af115087f8046f4b131ea2ededaead6f",
+    "semantic_hash": "af115087f8046f4b131ea2ededaead6f"
+  },
+  "site/js/script.js": {
+    "mtime": 1794246084.3272035,
+    "seen": 1794323133.3149662,
+    "ast_hash": "4900156ef1ab87718aeb4a3c84ac00db",
+    "semantic_hash": "4900156ef1ab87718aeb4a3c84ac00db"
+  },
+  "tsconfig.json": {
+    "mtime": 1794246224.5100324,
+    "seen": 1794323133.3149679,
+    "ast_hash": "dfdba1b045b865aa63128f0471de837c",
+    "semantic_hash": "dfdba1b045b865aa63128f0471de837c"
+  },
+  "types/leaflet-heat-module.d.ts": {
+    "mtime": 1794246501.3685899,
+    "seen": 1794323133.3149693,
+    "ast_hash": "e9355a388f11db16c0cce1d68368efe0",
+    "semantic_hash": "e9355a388f11db16c0cce1d68368efe0"
+  },
+  "types/leaflet-heat.d.ts": {
+    "mtime": 1794246499.118414,
+    "seen": 1794323133.314971,
+    "ast_hash": "2f0d19e2b5a07075ac4c1bbe9a174d68",
+    "semantic_hash": "2f0d19e2b5a07075ac4c1bbe9a174d68"
+  }
+}

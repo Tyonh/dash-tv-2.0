@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme {
+  --color-vermelho: #b12b3d;
+  --color-branco: #f3f3f3;
+  --color-cinza-escuro: #6c6c6b;
+  --color-cinza-claro: #e0e0e0;
+  --color-ouro: #ffaa00;
+  --font-sans: var(--font-poppins), sans-serif;
+
+  --animate-pulse-gold: pulse-gold 2.5s infinite;
+  --animate-scroll-news: scroll-news 60s linear infinite;
+  --animate-pulse-grow: pulse-grow 2s infinite ease-out;
+  --animate-cloud-drift: cloud-atmosphere-drift 45s ease-in-out infinite alternate;
+
+  @keyframes pulse-gold {
+    0%, 100% { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); }
+    50% { box-shadow: 0 10px 45px rgba(255, 170, 0, 0.6); }
+  }
+  @keyframes pulse-grow {
+    0% { transform: scale(0.3); opacity: 0.8; }
+    100% { transform: scale(2.2); opacity: 0; }
+  }
+  @keyframes scroll-news {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+  @keyframes cloud-atmosphere-drift {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.75; }
+    33% { transform: translate(-15px, 10px) scale(1.03) rotate(0.5deg); opacity: 0.9; }
+    66% { transform: translate(15px, -10px) scale(0.97) rotate(-0.5deg); opacity: 0.8; }
+    100% { transform: translate(-5px, -5px) scale(1.01) rotate(0.2deg); opacity: 0.85; }
+  }
+}
+
+html, body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+/* Leaflet: controles ocultos e animações das nuvens */
+.leaflet-control-zoom,
+.leaflet-control-attribution { display: none !important; }
+.animated-clouds {
+  pointer-events: none !important;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 15px 15px rgba(0, 0, 0, 0.15));
+  animation: cloud-atmosphere-drift 45s ease-in-out infinite alternate;
+}
+
+/* Mapa escuro da cena de vento: escurece os blocos claros do mapa base */
+.mapa-escuro {
+  filter: invert(1) hue-rotate(180deg) brightness(0.95) contrast(1.15) saturate(0.6);
+}
+
+/* ====================================================================
+   Barras: brilho em movimento, dourado de meta batida, pulso e faíscas
+   ==================================================================== */
+@keyframes brilho-passa {
+  from { transform: translateX(-130%); }
+  to { transform: translateX(330%); }
+}
+@keyframes brilho-passa-vertical {
+  from { transform: translateY(130%); }
+  to { transform: translateY(-330%); }
+}
+@keyframes pulso-ouro {
+  0%, 100% { box-shadow: 0 0 10px rgba(255, 170, 0, 0.45); }
+  50% { box-shadow: 0 0 26px rgba(255, 205, 70, 0.95); }
+}
+@keyframes faisca-pisca {
+  0%, 100% { opacity: 0; transform: scale(0.4) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.1) rotate(25deg); }
+}
+
+.barra-brilho::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 35%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  animation: brilho-passa 3s ease-in-out infinite;
+}
+.barra-brilho-vertical { overflow: hidden; }
+.barra-brilho-vertical::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 35%;
+  background: linear-gradient(0deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  animation: brilho-passa-vertical 3s ease-in-out infinite;
+}
+.fundo-ouro { background: linear-gradient(90deg, #c98a00, #ffb800 55%, #ffe07a); }
+.fundo-ouro-vertical { background: linear-gradient(0deg, #c98a00, #ffb800 55%, #ffe07a); }
+.brilho-ouro { animation: pulso-ouro 2.2s ease-in-out infinite; }
+.faisca { animation: faisca-pisca 2.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .barra-brilho::after,
+  .barra-brilho-vertical::after,
+  .brilho-ouro,
+  .faisca { animation: none; }
+  .faisca { opacity: 1; }
+}

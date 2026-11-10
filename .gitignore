@@ -6,3 +6,14 @@ config.js
 # Sistema / editor
 .DS_Store
 Thumbs.db
+
+# Cache de CNPJ do gerador (dados de clientes)
+scripts/.cache-cnpj.json
+
+# Next.js
+node_modules/
+.next/
+.env*.local
+.env
+next-env.d.ts
+*.tsbuildinfo
