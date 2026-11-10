@@ -55,7 +55,6 @@ Variáveis (`.env.local`, veja `.env.example`):
 - **Tamanho de tela:** o painel é desenhado em 1080x1920 e o palco se ajusta sozinho a qualquer tela (1080p, 4K ou outra proporção), mantendo a proporção e centralizando; em telas que não são 9:16 sobram faixas pretas. É uma escala do desenho inteiro, não um layout que se reorganiza. No 4K o texto e as barras ficam nítidos, mas os mapas (blocos do Google) e as partículas do vento são desenhados em 1080 e ampliados, então ficam mais suaves.
 
 - A página **recarrega sozinha todo dia às 6h30** (horário do computador) para liberar memória e pegar versão nova.
-- **Atualização automática após deploy:** a cada 30 segundos a TV pergunta a `/api/versao` qual build está no ar e recarrega se for diferente do que ela carregou. Cada build gera um identificador novo (ou use a variável `BUILD_ID` para fixar um). Depois do `git pull` e do `docker compose up -d --build`, as TVs se atualizam em até 30 segundos (mais o tempo do container reiniciar), sem ninguém mexer nelas. Só a primeira vez exige um F5 manual na TV, porque a versão que ela está rodando ainda não tem essa verificação.
 - Se uma planilha não responde, a seção mostra um aviso e mantém o último dado bom.
 - Cada quadro de satélite tem ~18,5 MB; com a TV ligada 11 h, são cerca de 1,2 GB por dia no computador que exibe o painel. Para reduzir, troque `TAMANHO` em `lib/server/satelite.ts` para `3600x2160`.
 

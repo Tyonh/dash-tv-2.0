@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import dynamic from "next/dynamic";
-import { useAtualizacaoAutomatica } from "@/hooks/useAtualizacaoAutomatica";
 import { useRecargaDiaria } from "@/hooks/useRecargaDiaria";
 import {
   TEMPO_DADOS_MS,
@@ -49,7 +48,6 @@ export function Dashboard() {
   const [indice, setIndice] = useState(0);
   const [gatilhoDados, setGatilhoDados] = useState(0);
   useRecargaDiaria();
-  useAtualizacaoAutomatica();
 
   const ordem = ORDEM;
   const cena = ordem[indice % ordem.length];
