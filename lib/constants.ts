@@ -12,9 +12,10 @@ export const SHEET_URLS = {
 
 export const TEMPO_DADOS_MS = 20_000;
 export const TEMPO_MAPA_MS = 15_000;
-export const TEMPO_VENTO_MS = 7_000;
+export const TEMPO_TEMPERATURA_MS = 10_000;
+export const TEMPO_VENTO_MS = 10_000;
 export const VENTO_REFRESH_MS = 1_800_000;
-export const TEMPO_SATELITE_MS = 7_000;
+export const TEMPO_SATELITE_MS = 10_000;
 export const SATELITE_REFRESH_MS = 600_000;
 export const ORCAMENTOS_REFRESH_MS = 300_000;
 

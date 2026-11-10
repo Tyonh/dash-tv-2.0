@@ -4,14 +4,15 @@ Painel de TV da equipe de vendas (TV na vertical, ligada das 7h às 18h). Next.j
 
 ## O que o painel mostra
 
-O painel gira entre quatro telas:
+O painel gira entre quatro telas (cinco, com a temperatura):
 
 | Tela | Tempo | Conteúdo |
 |---|---|---|
 | Dados | 20 s | Ranking de meta individual, positivação (meta x realizado), pódio do mês, clima de Fortaleza e notícias do IBGE. Quem bate a meta ganha barra dourada, troféu e faíscas |
 | Mapa | 15 s | Mapa do Nordeste com rotas, nuvens e radar de chuva |
-| Vento | 7 s | Fluxo de vento a 10 m (NOAA GFS), mapa colorido pela velocidade com partículas brancas |
-| Satélite | 7 s | Imagem real do GOES-19 (NOAA) em cores reais, recortada sobre o Nordeste |
+| Temperatura | 10 s | Mapa de calor da temperatura do ar (OpenWeather `temp_new`), entre o mapa e o vento. Só entra no rodízio se `OPENWEATHER_API_KEY` existir no servidor |
+| Vento | 10 s | Fluxo de vento a 10 m (NOAA GFS), mapa colorido pela velocidade com partículas brancas |
+| Satélite | 10 s | Imagem real do GOES-19 (NOAA) em cores reais, recortada sobre o Nordeste |
 
 O painel portuário aparece no topo de todas as telas de mapa. Sem contêineres na lista, mostra o aviso de que todos chegaram ao destino.
 
@@ -68,7 +69,6 @@ Este projeto roda como servidor Node (não é mais site estático). Atenção:
 ## Pendências
 
 - Calor de vendas por cidade: depende do GEDOC registrar a cidade do cliente (preenchida pelo CNPJ).
-- Calor de temperatura no mapa: fonte ainda não escolhida.
 - Segurança: faltam CSP e limite de requisições nas rotas `/api`.
 
 Planos e referências de pesquisa: `referencias/`.
