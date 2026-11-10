@@ -82,6 +82,22 @@ export interface VentoPayload {
   campos: [CampoVento, CampoVento];
 }
 
+export interface TemperaturaPayload {
+  atualizado_em: string;
+  referencia: string;
+  valido_para: string;
+  /** Temperatura do ar a 2 m em °C, em grade regular com a primeira linha ao norte. */
+  campo: {
+    nx: number;
+    ny: number;
+    lo1: number;
+    la1: number;
+    dx: number;
+    dy: number;
+    data: number[];
+  };
+}
+
 export interface SatelitePayload {
   arquivo: string;
   url: string;

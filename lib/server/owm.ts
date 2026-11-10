@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-export type CamadaOwm = "clouds_new" | "temp_new";
+export type CamadaOwm = "clouds_new";
 export type ParamsBloco = { params: Promise<{ z: string; x: string; y: string }> };
 
 const ZOOM_MAXIMO = 12;

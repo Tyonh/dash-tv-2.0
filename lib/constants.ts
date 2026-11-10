@@ -18,6 +18,7 @@ export const VENTO_REFRESH_MS = 1_800_000;
 export const TEMPO_SATELITE_MS = 10_000;
 export const SATELITE_REFRESH_MS = 600_000;
 export const ORCAMENTOS_REFRESH_MS = 300_000;
+export const VERIFICAR_VERSAO_MS = 30_000;
 
 export const MESES = [
   "JANEIRO",

@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import dynamic from "next/dynamic";
+import { useAtualizacaoAutomatica } from "@/hooks/useAtualizacaoAutomatica";
 import { useRecargaDiaria } from "@/hooks/useRecargaDiaria";
 import {
   TEMPO_DADOS_MS,
@@ -42,34 +43,15 @@ function Slide({ ativo, children }: SlideProps) {
   );
 }
 
-/** A temperatura vem do OpenWeather: sem chave no servidor, a cena não entra no rodízio. */
-function useTemperaturaDisponivel(): boolean {
-  const [disponivel, setDisponivel] = useState(false);
-  useEffect(() => {
-    let cancelado = false;
-    fetch("/api/nuvens/ativo")
-      .then((r) => r.json() as Promise<{ ativo?: boolean }>)
-      .then((d) => {
-        if (!cancelado) setDisponivel(Boolean(d.ativo));
-      })
-      .catch(() => undefined);
-    return () => {
-      cancelado = true;
-    };
-  }, []);
-  return disponivel;
-}
+const ORDEM: readonly Cena[] = ["dados", "mapa", "temperatura", "vento", "satelite"];
 
 export function Dashboard() {
   const [indice, setIndice] = useState(0);
   const [gatilhoDados, setGatilhoDados] = useState(0);
-  const temTemperatura = useTemperaturaDisponivel();
   useRecargaDiaria();
+  useAtualizacaoAutomatica();
 
-  const ordem = useMemo<Cena[]>(
-    () => (temTemperatura ? ["dados", "mapa", "temperatura", "vento", "satelite"] : ["dados", "mapa", "vento", "satelite"]),
-    [temTemperatura],
-  );
+  const ordem = ORDEM;
   const cena = ordem[indice % ordem.length];
 
   useEffect(() => {
@@ -93,12 +75,10 @@ export function Dashboard() {
           <MapSlide ativo={cena === "mapa"} />
           <LogisticsPanel />
         </Slide>
-        {temTemperatura && (
-          <Slide ativo={cena === "temperatura"}>
-            <TemperaturaSlide ativo={cena === "temperatura"} />
-            <LogisticsPanel />
-          </Slide>
-        )}
+        <Slide ativo={cena === "temperatura"}>
+          <TemperaturaSlide ativo={cena === "temperatura"} />
+          <LogisticsPanel />
+        </Slide>
         <Slide ativo={cena === "vento"}>
           <VentoSlide ativo={cena === "vento"} />
           <LogisticsPanel />
